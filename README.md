@@ -91,7 +91,6 @@ smart_car_dual_fusion/
 │   │   ├── camera_line_follower.yaml     # PID/阈值/丢线参数
 │   │   └── camera_line_follower.rviz     # RViz 布局
 │   └── worlds/line_track_camera.world    # Gazebo 赛道
-├── 技术报告.md                          # 完整技术文档
 └── README.md                            # 本文件
 ```
 
@@ -217,8 +216,4 @@ track2_params = dict(rx_base=2.60, ry_base=1.50,
 sudo apt install ros-noetic-cv-bridge python3-opencv
 ```
 
----
 
-## 致谢
-
-基于哈尔滨工程大学许德新老师提供的 ROS 仿真项目框架。
