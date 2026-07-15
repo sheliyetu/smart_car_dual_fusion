@@ -216,4 +216,15 @@ track2_params = dict(rx_base=2.60, ry_base=1.50,
 sudo apt install ros-noetic-cv-bridge python3-opencv
 ```
 
+---
+
+## 致谢
+
+本项目在以下两个开源项目的基础上进行改进与融合：
+
+- [`smart_car_follower`](https://gitee.com/labgps/smart_car_follower) — 五路光电传感巡线 ROS 仿真（许德新）
+- [`smart_car_no_mask`](https://gitee.com/labgps/smart_car_no_mask) — 摄像头视觉巡线 ROS 仿真（许德新）
+
+感谢许德新老师提供的 ROS 仿真项目框架与课程指导。
+
 
