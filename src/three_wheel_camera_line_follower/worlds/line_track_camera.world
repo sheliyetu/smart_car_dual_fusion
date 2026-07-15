@@ -1,0 +1,2921 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="camera_line_following_world">
+    <physics name="default_physics" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <scene>
+      <ambient>0.9 0.9 0.9 1</ambient>
+      <background>0.86 0.90 0.94 1</background>
+      <shadows>false</shadows>
+    </scene>
+
+    <include><uri>model://sun</uri></include>
+
+    <light name="soft_area_light" type="point">
+      <pose>0 0 3.0 0 0 0</pose>
+      <diffuse>0.9 0.9 0.9 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>8</range><constant>0.7</constant><linear>0.08</linear><quadratic>0.01</quadratic></attenuation>
+    </light>
+
+    <model name="white_ground">
+      <static>true</static>
+      <link name="ground_link">
+        <collision name="ground_collision">
+          <geometry><box><size>6.0 4.5 0.02</size></box></geometry>
+          <surface><friction><ode><mu>1.4</mu><mu2>1.4</mu2></ode></friction></surface>
+        </collision>
+        <visual name="ground_visual">
+          <geometry><box><size>6.0 4.5 0.02</size></box></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse><specular>0.05 0.05 0.05 1</specular></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Black closed track, visible to the Gazebo camera. -->
+    <model name="black_line_000">
+      <static>true</static>
+      <pose>2.215967 0.016960 0.018 0 0 1.232498</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035959 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_001">
+      <static>true</static>
+      <pose>2.226760 0.050630 0.018 0 0 1.289628</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034784 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_002">
+      <static>true</static>
+      <pose>2.235295 0.083803 0.018 0 0 1.349238</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033753 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_003">
+      <static>true</static>
+      <pose>2.241618 0.116491 0.018 0 0 1.410995</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032868 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_004">
+      <static>true</static>
+      <pose>2.245778 0.148706 0.018 0 0 1.474469</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032131 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_005">
+      <static>true</static>
+      <pose>2.247822 0.180461 0.018 0 0 1.539146</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031543 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_006">
+      <static>true</static>
+      <pose>2.247798 0.211766 0.018 0 0 1.604450</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031101 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_007">
+      <static>true</static>
+      <pose>2.245753 0.242633 0.018 0 0 1.669765</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030803 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_008">
+      <static>true</static>
+      <pose>2.241735 0.273075 0.018 0 0 1.734476</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030642 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_009">
+      <static>true</static>
+      <pose>2.235791 0.303104 0.018 0 0 1.797994</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030611 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_010">
+      <static>true</static>
+      <pose>2.227969 0.332730 0.018 0 0 1.859790</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030702 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_011">
+      <static>true</static>
+      <pose>2.218315 0.361967 0.018 0 0 1.919415</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030903 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_012">
+      <static>true</static>
+      <pose>2.206560 0.390723 0.018 0 0 1.997819</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031277 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_013">
+      <static>true</static>
+      <pose>2.192194 0.418836 0.018 0 0 2.087684</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031929 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_014">
+      <static>true</static>
+      <pose>2.175149 0.446287 0.018 0 0 2.164276</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032743 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_015">
+      <static>true</static>
+      <pose>2.155717 0.473172 0.018 0 0 2.228148</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033636 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_016">
+      <static>true</static>
+      <pose>2.134190 0.499589 0.018 0 0 2.280273</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034542 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_017">
+      <static>true</static>
+      <pose>2.110859 0.525635 0.018 0 0 2.321743</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035408 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_018">
+      <static>true</static>
+      <pose>2.086016 0.551407 0.018 0 0 2.353594</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036194 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_019">
+      <static>true</static>
+      <pose>2.059952 0.577002 0.018 0 0 2.376712</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036870 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_020">
+      <static>true</static>
+      <pose>2.032961 0.602517 0.018 0 0 2.391803</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037418 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_021">
+      <static>true</static>
+      <pose>2.005332 0.628050 0.018 0 0 2.399380</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037823 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_022">
+      <static>true</static>
+      <pose>1.977358 0.653696 0.018 0 0 2.399768</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038080 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_023">
+      <static>true</static>
+      <pose>1.949330 0.679554 0.018 0 0 2.393117</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038188 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_024">
+      <static>true</static>
+      <pose>1.921168 0.705697 0.018 0 0 2.393620</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038664 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_025">
+      <static>true</static>
+      <pose>1.892340 0.732111 0.018 0 0 2.405928</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039537 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_026">
+      <static>true</static>
+      <pose>1.862575 0.758717 0.018 0 0 2.418335</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040310 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_027">
+      <static>true</static>
+      <pose>1.831934 0.785424 0.018 0 0 2.430927</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040985 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_028">
+      <static>true</static>
+      <pose>1.800479 0.812144 0.018 0 0 2.443785</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041561 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_029">
+      <static>true</static>
+      <pose>1.768273 0.838788 0.018 0 0 2.456992</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042040 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_030">
+      <static>true</static>
+      <pose>1.735377 0.865268 0.018 0 0 2.470627</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042422 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_031">
+      <static>true</static>
+      <pose>1.701853 0.891495 0.018 0 0 2.484775</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042708 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_032">
+      <static>true</static>
+      <pose>1.667763 0.917379 0.018 0 0 2.499521</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042900 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_033">
+      <static>true</static>
+      <pose>1.633170 0.942833 0.018 0 0 2.514958</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043000 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_034">
+      <static>true</static>
+      <pose>1.598134 0.967767 0.018 0 0 2.531183</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043007 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_035">
+      <static>true</static>
+      <pose>1.562719 0.992092 0.018 0 0 2.548303</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042925 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_036">
+      <static>true</static>
+      <pose>1.526925 1.016011 0.018 0 0 2.556672</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043175 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_037">
+      <static>true</static>
+      <pose>1.490671 1.039974 0.018 0 0 2.558398</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043741 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_038">
+      <static>true</static>
+      <pose>1.453900 1.064080 0.018 0 0 2.564176</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044196 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_039">
+      <static>true</static>
+      <pose>1.416605 1.088118 0.018 0 0 2.573924</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044545 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_040">
+      <static>true</static>
+      <pose>1.378779 1.111876 0.018 0 0 2.587619</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044793 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_041">
+      <static>true</static>
+      <pose>1.340415 1.135141 0.018 0 0 2.605286</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044946 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_042">
+      <static>true</static>
+      <pose>1.301505 1.157701 0.018 0 0 2.626995</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045014 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_043">
+      <static>true</static>
+      <pose>1.262042 1.179345 0.018 0 0 2.652852</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045011 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_044">
+      <static>true</static>
+      <pose>1.222019 1.199862 0.018 0 0 2.682985</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044949 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_045">
+      <static>true</static>
+      <pose>1.181429 1.219037 0.018 0 0 2.717539</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044847 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_046">
+      <static>true</static>
+      <pose>1.140265 1.236661 0.018 0 0 2.756653</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044726 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_047">
+      <static>true</static>
+      <pose>1.098519 1.252521 0.018 0 0 2.800443</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044609 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_048">
+      <static>true</static>
+      <pose>1.056032 1.266648 0.018 0 0 2.840574</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044957 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_049">
+      <static>true</static>
+      <pose>1.012552 1.279383 0.018 0 0 2.872519</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045668 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_050">
+      <static>true</static>
+      <pose>0.968071 1.290921 0.018 0 0 2.902877</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046249 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_051">
+      <static>true</static>
+      <pose>0.922764 1.301248 0.018 0 0 2.931989</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046698 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_052">
+      <static>true</static>
+      <pose>0.876806 1.310347 0.018 0 0 2.960165</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047011 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_053">
+      <static>true</static>
+      <pose>0.830372 1.318205 0.018 0 0 2.987692</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047186 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_054">
+      <static>true</static>
+      <pose>0.783636 1.324806 0.018 0 0 3.014841</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047221 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_055">
+      <static>true</static>
+      <pose>0.736775 1.330136 0.018 0 0 3.041876</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047115 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_056">
+      <static>true</static>
+      <pose>0.689963 1.334180 0.018 0 0 3.069061</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046867 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_057">
+      <static>true</static>
+      <pose>0.643375 1.336921 0.018 0 0 3.096665</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046480 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_058">
+      <static>true</static>
+      <pose>0.597185 1.338347 0.018 0 0 3.124972</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045953 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_059">
+      <static>true</static>
+      <pose>0.551570 1.338442 0.018 0 0 -3.128896</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045289 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_060">
+      <static>true</static>
+      <pose>0.506457 1.336964 0.018 0 0 -3.088704</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045003 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_061">
+      <static>true</static>
+      <pose>0.461493 1.333543 0.018 0 0 -3.042713</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045209 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_062">
+      <static>true</static>
+      <pose>0.416512 1.328170 0.018 0 0 -3.002777</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045411 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_063">
+      <static>true</static>
+      <pose>0.371575 1.321108 0.018 0 0 -2.968705</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045579 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_064">
+      <static>true</static>
+      <pose>0.326744 1.312620 0.018 0 0 -2.940287</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045685 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_065">
+      <static>true</static>
+      <pose>0.282081 1.302970 0.018 0 0 -2.917329</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045710 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_066">
+      <static>true</static>
+      <pose>0.237645 1.292421 0.018 0 0 -2.899673</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045635 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_067">
+      <static>true</static>
+      <pose>0.193500 1.281237 0.018 0 0 -2.887217</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045448 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_068">
+      <static>true</static>
+      <pose>0.149706 1.269680 0.018 0 0 -2.879929</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045140 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_069">
+      <static>true</static>
+      <pose>0.106324 1.258014 0.018 0 0 -2.877855</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044706 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_070">
+      <static>true</static>
+      <pose>0.063417 1.246503 0.018 0 0 -2.881130</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044144 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_071">
+      <static>true</static>
+      <pose>0.021045 1.235409 0.018 0 0 -2.889992</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043457 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_072">
+      <static>true</static>
+      <pose>-0.020591 1.224512 0.018 0 0 -2.881138</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042619 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_073">
+      <static>true</static>
+      <pose>-0.061244 1.213091 0.018 0 0 -2.854010</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041843 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_074">
+      <static>true</static>
+      <pose>-0.100953 1.200885 0.018 0 0 -2.832583</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041246 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_075">
+      <static>true</static>
+      <pose>-0.139942 1.188112 0.018 0 0 -2.817368</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040812 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_076">
+      <static>true</static>
+      <pose>-0.178437 1.174990 0.018 0 0 -2.808738</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040528 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_077">
+      <static>true</static>
+      <pose>-0.216662 1.161736 0.018 0 0 -2.806926</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040388 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_078">
+      <static>true</static>
+      <pose>-0.254843 1.148568 0.018 0 0 -2.812023</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040389 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_079">
+      <static>true</static>
+      <pose>-0.293205 1.135702 0.018 0 0 -2.823974</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040536 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_080">
+      <static>true</static>
+      <pose>-0.331972 1.123357 0.018 0 0 -2.842572</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040839 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_081">
+      <static>true</static>
+      <pose>-0.371371 1.111750 0.018 0 0 -2.867456</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041313 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_082">
+      <static>true</static>
+      <pose>-0.411625 1.101098 0.018 0 0 -2.898106</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041977 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_083">
+      <static>true</static>
+      <pose>-0.452961 1.091619 0.018 0 0 -2.933846</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042854 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_084">
+      <static>true</static>
+      <pose>-0.495344 1.083404 0.018 0 0 -2.966202</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043501 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_085">
+      <static>true</static>
+      <pose>-0.538413 1.076308 0.018 0 0 -2.990327</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043805 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_086">
+      <static>true</static>
+      <pose>-0.581961 1.070142 0.018 0 0 -3.011453</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044164 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_087">
+      <static>true</static>
+      <pose>-0.626003 1.064785 0.018 0 0 -3.029585</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044573 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_088">
+      <static>true</static>
+      <pose>-0.670556 1.060118 0.018 0 0 -3.044758</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045023 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_089">
+      <static>true</static>
+      <pose>-0.715634 1.056019 0.018 0 0 -3.057021</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045509 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_090">
+      <static>true</static>
+      <pose>-0.761256 1.052369 0.018 0 0 -3.066444</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046026 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_091">
+      <static>true</static>
+      <pose>-0.807435 1.049048 0.018 0 0 -3.073102</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046572 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_092">
+      <static>true</static>
+      <pose>-0.854189 1.045935 0.018 0 0 -3.077081</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047143 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_093">
+      <static>true</static>
+      <pose>-0.901533 1.042909 0.018 0 0 -3.078471</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047738 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_094">
+      <static>true</static>
+      <pose>-0.949483 1.039852 0.018 0 0 -3.077365</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.048357 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_095">
+      <static>true</static>
+      <pose>-0.998056 1.036642 0.018 0 0 -3.073859</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049000 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_096">
+      <static>true</static>
+      <pose>-1.047681 1.033563 0.018 0 0 -3.085238</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.050442 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_097">
+      <static>true</static>
+      <pose>-1.099039 1.031244 0.018 0 0 -3.107286</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.052385 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_098">
+      <static>true</static>
+      <pose>-1.152155 1.029820 0.018 0 0 -3.122083</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.053888 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_099">
+      <static>true</static>
+      <pose>-1.206558 1.028992 0.018 0 0 -3.130589</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.054933 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_100">
+      <static>true</static>
+      <pose>-1.261779 1.028462 0.018 0 0 -3.133372</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.055514 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_101">
+      <static>true</static>
+      <pose>-1.317347 1.027930 0.018 0 0 -3.130680</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.055628 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_102">
+      <static>true</static>
+      <pose>-1.372793 1.027098 0.018 0 0 -3.122480</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.055276 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_103">
+      <static>true</static>
+      <pose>-1.427644 1.025668 0.018 0 0 -3.108456</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.054467 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_104">
+      <static>true</static>
+      <pose>-1.481433 1.023340 0.018 0 0 -3.087985</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.053215 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_105">
+      <static>true</static>
+      <pose>-1.533687 1.019816 0.018 0 0 -3.060073</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.051541 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_106">
+      <static>true</static>
+      <pose>-1.583937 1.014797 0.018 0 0 -3.023255</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049477 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_107">
+      <static>true</static>
+      <pose>-1.631714 1.007984 0.018 0 0 -2.975449</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047070 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_108">
+      <static>true</static>
+      <pose>-1.677374 0.999476 0.018 0 0 -2.938816</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045839 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_109">
+      <static>true</static>
+      <pose>-1.722147 0.989842 0.018 0 0 -2.920457</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045760 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_110">
+      <static>true</static>
+      <pose>-1.766492 0.979362 0.018 0 0 -2.898498</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045379 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_111">
+      <static>true</static>
+      <pose>-1.810061 0.967956 0.018 0 0 -2.872396</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044704 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_112">
+      <static>true</static>
+      <pose>-1.852506 0.955543 0.018 0 0 -2.841431</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043752 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_113">
+      <static>true</static>
+      <pose>-1.893478 0.942043 0.018 0 0 -2.804660</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042540 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_114">
+      <static>true</static>
+      <pose>-1.932628 0.927375 0.018 0 0 -2.760856</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041096 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_115">
+      <static>true</static>
+      <pose>-1.969609 0.911460 0.018 0 0 -2.708440</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039452 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_116">
+      <static>true</static>
+      <pose>-2.004072 0.894216 0.018 0 0 -2.645401</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037658 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_117">
+      <static>true</static>
+      <pose>-2.035667 0.875564 0.018 0 0 -2.569244</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035777 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_118">
+      <static>true</static>
+      <pose>-2.064048 0.855422 0.018 0 0 -2.477036</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033900 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_119">
+      <static>true</static>
+      <pose>-2.088865 0.833710 0.018 0 0 -2.365686</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032150 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_120">
+      <static>true</static>
+      <pose>-2.109890 0.810225 0.018 0 0 -2.233932</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031029 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_121">
+      <static>true</static>
+      <pose>-2.127223 0.784744 0.018 0 0 -2.101716</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030741 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_122">
+      <static>true</static>
+      <pose>-2.141161 0.757321 0.018 0 0 -1.980624</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030895 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_123">
+      <static>true</static>
+      <pose>-2.151984 0.728186 0.018 0 0 -1.873132</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031357 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_124">
+      <static>true</static>
+      <pose>-2.159974 0.697567 0.018 0 0 -1.779940</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032000 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_125">
+      <static>true</static>
+      <pose>-2.165413 0.665694 0.018 0 0 -1.700533</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032717 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_126">
+      <static>true</static>
+      <pose>-2.168580 0.632796 0.018 0 0 -1.633758</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033419 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_127">
+      <static>true</static>
+      <pose>-2.169759 0.599104 0.018 0 0 -1.578256</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034034 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_128">
+      <static>true</static>
+      <pose>-2.169229 0.564845 0.018 0 0 -1.532719</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034510 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_129">
+      <static>true</static>
+      <pose>-2.167272 0.530249 0.018 0 0 -1.496020</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034804 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_130">
+      <static>true</static>
+      <pose>-2.164169 0.495545 0.018 0 0 -1.467269</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034887 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_131">
+      <static>true</static>
+      <pose>-2.160202 0.460964 0.018 0 0 -1.445833</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034734 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_132">
+      <static>true</static>
+      <pose>-2.154952 0.426274 0.018 0 0 -1.395906</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035456 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_133">
+      <static>true</static>
+      <pose>-2.147354 0.390789 0.018 0 0 -1.325484</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037169 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_134">
+      <static>true</static>
+      <pose>-2.137114 0.354277 0.018 0 0 -1.270326</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038700 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_135">
+      <static>true</static>
+      <pose>-2.124661 0.316970 0.018 0 0 -1.227629</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039979 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_136">
+      <static>true</static>
+      <pose>-2.110426 0.279097 0.018 0 0 -1.195286</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040953 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_137">
+      <static>true</static>
+      <pose>-2.094837 0.240887 0.018 0 0 -1.171790</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041588 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_138">
+      <static>true</static>
+      <pose>-2.078327 0.202570 0.018 0 0 -1.156137</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041861 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_139">
+      <static>true</static>
+      <pose>-2.061323 0.164375 0.018 0 0 -1.147756</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041757 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_140">
+      <static>true</static>
+      <pose>-2.044256 0.126533 0.018 0 0 -1.146469</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041269 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_141">
+      <static>true</static>
+      <pose>-2.027557 0.089273 0.018 0 0 -1.152498</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040395 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_142">
+      <static>true</static>
+      <pose>-2.011654 0.052823 0.018 0 0 -1.166507</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039142 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_143">
+      <static>true</static>
+      <pose>-1.996978 0.017415 0.018 0 0 -1.189718</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037522 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_144">
+      <static>true</static>
+      <pose>-1.983521 -0.016960 0.018 0 0 -1.205870</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036312 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_145">
+      <static>true</static>
+      <pose>-1.970683 -0.050630 0.018 0 0 -1.207224</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035755 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_146">
+      <static>true</static>
+      <pose>-1.958075 -0.083803 0.018 0 0 -1.207928</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035221 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_147">
+      <static>true</static>
+      <pose>-1.945664 -0.116491 0.018 0 0 -1.207950</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034709 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_148">
+      <static>true</static>
+      <pose>-1.933421 -0.148706 0.018 0 0 -1.207259</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034218 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_149">
+      <static>true</static>
+      <pose>-1.921314 -0.180461 0.018 0 0 -1.205826</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033750 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_150">
+      <static>true</static>
+      <pose>-1.909313 -0.211766 0.018 0 0 -1.203622</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033303 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_151">
+      <static>true</static>
+      <pose>-1.897388 -0.242633 0.018 0 0 -1.200620</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032879 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_152">
+      <static>true</static>
+      <pose>-1.885508 -0.273075 0.018 0 0 -1.196796</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032477 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_153">
+      <static>true</static>
+      <pose>-1.873642 -0.303104 0.018 0 0 -1.192126</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032098 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_154">
+      <static>true</static>
+      <pose>-1.861760 -0.332730 0.018 0 0 -1.186590</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031743 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_155">
+      <static>true</static>
+      <pose>-1.849831 -0.361967 0.018 0 0 -1.180170</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031410 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_156">
+      <static>true</static>
+      <pose>-1.838080 -0.390723 0.018 0 0 -1.185592</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030719 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_157">
+      <static>true</static>
+      <pose>-1.826915 -0.418836 0.018 0 0 -1.200143</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.029780 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_158">
+      <static>true</static>
+      <pose>-1.816385 -0.446287 0.018 0 0 -1.208981</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.029023 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_159">
+      <static>true</static>
+      <pose>-1.806247 -0.473172 0.018 0 0 -1.211484</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.028443 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_160">
+      <static>true</static>
+      <pose>-1.796261 -0.499589 0.018 0 0 -1.207210</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.028040 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_161">
+      <static>true</static>
+      <pose>-1.786183 -0.525635 0.018 0 0 -1.195948</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.027816 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_162">
+      <static>true</static>
+      <pose>-1.775771 -0.551407 0.018 0 0 -1.177748</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.027777 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_163">
+      <static>true</static>
+      <pose>-1.764784 -0.577002 0.018 0 0 -1.152951</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.027934 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_164">
+      <static>true</static>
+      <pose>-1.752979 -0.602517 0.018 0 0 -1.122183</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.028300 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_165">
+      <static>true</static>
+      <pose>-1.740115 -0.628050 0.018 0 0 -1.086338</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.028890 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_166">
+      <static>true</static>
+      <pose>-1.725948 -0.653696 0.018 0 0 -1.046516</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.029720 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_167">
+      <static>true</static>
+      <pose>-1.710239 -0.679554 0.018 0 0 -1.003944</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030806 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_168">
+      <static>true</static>
+      <pose>-1.692990 -0.705697 0.018 0 0 -0.971708</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.031843 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_169">
+      <static>true</static>
+      <pose>-1.674539 -0.732111 0.018 0 0 -0.950704</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032602 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_170">
+      <static>true</static>
+      <pose>-1.655108 -0.758717 0.018 0 0 -0.929481</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033293 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_171">
+      <static>true</static>
+      <pose>-1.634712 -0.785424 0.018 0 0 -0.907917</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.033919 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_172">
+      <static>true</static>
+      <pose>-1.613369 -0.812144 0.018 0 0 -0.885899</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034480 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_173">
+      <static>true</static>
+      <pose>-1.591096 -0.838788 0.018 0 0 -0.863318</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034979 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_174">
+      <static>true</static>
+      <pose>-1.567911 -0.865268 0.018 0 0 -0.840070</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035418 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_175">
+      <static>true</static>
+      <pose>-1.543828 -0.891495 0.018 0 0 -0.816052</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035799 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_176">
+      <static>true</static>
+      <pose>-1.518867 -0.917379 0.018 0 0 -0.791163</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036125 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_177">
+      <static>true</static>
+      <pose>-1.493044 -0.942833 0.018 0 0 -0.765302</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036400 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_178">
+      <static>true</static>
+      <pose>-1.466375 -0.967767 0.018 0 0 -0.738366</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036626 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_179">
+      <static>true</static>
+      <pose>-1.438878 -0.992092 0.018 0 0 -0.710254</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.036807 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_180">
+      <static>true</static>
+      <pose>-1.410450 -1.016011 0.018 0 0 -0.688896</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037500 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_181">
+      <static>true</static>
+      <pose>-1.380901 -1.039974 0.018 0 0 -0.674099</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038590 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_182">
+      <static>true</static>
+      <pose>-1.350206 -1.064080 0.018 0 0 -0.657587</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039471 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_183">
+      <static>true</static>
+      <pose>-1.318476 -1.088118 0.018 0 0 -0.639213</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040148 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_184">
+      <static>true</static>
+      <pose>-1.285819 -1.111876 0.018 0 0 -0.618791</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040624 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_185">
+      <static>true</static>
+      <pose>-1.252347 -1.135141 0.018 0 0 -0.596088</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040907 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_186">
+      <static>true</static>
+      <pose>-1.218170 -1.157701 0.018 0 0 -0.570825</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041004 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_187">
+      <static>true</static>
+      <pose>-1.183397 -1.179345 0.018 0 0 -0.542666</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040922 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_188">
+      <static>true</static>
+      <pose>-1.148138 -1.199862 0.018 0 0 -0.511213</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040674 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_189">
+      <static>true</static>
+      <pose>-1.112505 -1.219037 0.018 0 0 -0.475997</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040270 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_190">
+      <static>true</static>
+      <pose>-1.076606 -1.236661 0.018 0 0 -0.436469</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039728 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_191">
+      <static>true</static>
+      <pose>-1.040552 -1.252521 0.018 0 0 -0.391994</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039067 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_192">
+      <static>true</static>
+      <pose>-1.004384 -1.266648 0.018 0 0 -0.352534</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038605 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_193">
+      <static>true</static>
+      <pose>-0.968021 -1.279383 0.018 0 0 -0.321130</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038462 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_194">
+      <static>true</static>
+      <pose>-0.931365 -1.290921 0.018 0 0 -0.288740</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038406 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_195">
+      <static>true</static>
+      <pose>-0.894361 -1.301248 0.018 0 0 -0.255549</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038440 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_196">
+      <static>true</static>
+      <pose>-0.856955 -1.310347 0.018 0 0 -0.221760</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038566 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_197">
+      <static>true</static>
+      <pose>-0.819090 -1.318205 0.018 0 0 -0.187585</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038787 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_198">
+      <static>true</static>
+      <pose>-0.780713 -1.324806 0.018 0 0 -0.153244</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039106 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_199">
+      <static>true</static>
+      <pose>-0.741768 -1.330136 0.018 0 0 -0.118955</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.039523 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_200">
+      <static>true</static>
+      <pose>-0.702199 -1.334180 0.018 0 0 -0.084930</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040038 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_201">
+      <static>true</static>
+      <pose>-0.661952 -1.336921 0.018 0 0 -0.051372</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040654 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_202">
+      <static>true</static>
+      <pose>-0.620971 -1.338347 0.018 0 0 -0.018463</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041368 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_203">
+      <static>true</static>
+      <pose>-0.579202 -1.338442 0.018 0 0 0.013631</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042182 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_204">
+      <static>true</static>
+      <pose>-0.536586 -1.336964 0.018 0 0 0.055203</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043119 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_205">
+      <static>true</static>
+      <pose>-0.493107 -1.333543 0.018 0 0 0.101301</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044132 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_206">
+      <static>true</static>
+      <pose>-0.448809 -1.328170 0.018 0 0 0.139685</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045130 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_207">
+      <static>true</static>
+      <pose>-0.403759 -1.321108 0.018 0 0 0.170985</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046081 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_208">
+      <static>true</static>
+      <pose>-0.358025 -1.312620 0.018 0 0 0.195782</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046957 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_209">
+      <static>true</static>
+      <pose>-0.311674 -1.302970 0.018 0 0 0.214581</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047738 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_210">
+      <static>true</static>
+      <pose>-0.264772 -1.292421 0.018 0 0 0.227796</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.048410 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_211">
+      <static>true</static>
+      <pose>-0.217388 -1.281237 0.018 0 0 0.235750</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.048963 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_212">
+      <static>true</static>
+      <pose>-0.169588 -1.269680 0.018 0 0 0.238681</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049391 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_213">
+      <static>true</static>
+      <pose>-0.121439 -1.258014 0.018 0 0 0.236739</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049692 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_214">
+      <static>true</static>
+      <pose>-0.073010 -1.246503 0.018 0 0 0.229998</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049866 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_215">
+      <static>true</static>
+      <pose>-0.024367 -1.235409 0.018 0 0 0.218459</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049920 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_216">
+      <static>true</static>
+      <pose>0.024820 -1.224512 0.018 0 0 0.217596</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.050839 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_217">
+      <static>true</static>
+      <pose>0.075182 -1.213091 0.018 0 0 0.228280</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.052444 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_218">
+      <static>true</static>
+      <pose>0.126810 -1.200885 0.018 0 0 0.235947</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.053660 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_219">
+      <static>true</static>
+      <pose>0.179351 -1.188112 0.018 0 0 0.240964</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.054483 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_220">
+      <static>true</static>
+      <pose>0.232450 -1.174990 0.018 0 0 0.243559</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.054911 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_221">
+      <static>true</static>
+      <pose>0.285755 -1.161736 0.018 0 0 0.243845</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.054944 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_222">
+      <static>true</static>
+      <pose>0.338911 -1.148568 0.018 0 0 0.241831</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.054581 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_223">
+      <static>true</static>
+      <pose>0.391565 -1.135702 0.018 0 0 0.237427</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.053824 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_224">
+      <static>true</static>
+      <pose>0.443362 -1.123357 0.018 0 0 0.230431</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.052674 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_225">
+      <static>true</static>
+      <pose>0.493950 -1.111750 0.018 0 0 0.220507</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.051133 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_226">
+      <static>true</static>
+      <pose>0.542975 -1.101098 0.018 0 0 0.207145</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.049206 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_227">
+      <static>true</static>
+      <pose>0.590083 -1.091619 0.018 0 0 0.189590</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046901 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_228">
+      <static>true</static>
+      <pose>0.635427 -1.083404 0.018 0 0 0.168474</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045269 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_229">
+      <static>true</static>
+      <pose>0.679743 -1.076308 0.018 0 0 0.148899</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044495 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_230">
+      <static>true</static>
+      <pose>0.723365 -1.070142 0.018 0 0 0.131773</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.043620 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_231">
+      <static>true</static>
+      <pose>0.766159 -1.064785 0.018 0 0 0.117115</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042637 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_232">
+      <static>true</static>
+      <pose>0.807987 -1.060118 0.018 0 0 0.104980</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.041541 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_233">
+      <static>true</static>
+      <pose>0.848715 -1.056019 0.018 0 0 0.095469</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040327 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_234">
+      <static>true</static>
+      <pose>0.888207 -1.052369 0.018 0 0 0.088738</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038992 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_235">
+      <static>true</static>
+      <pose>0.926325 -1.049048 0.018 0 0 0.085018</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037534 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_236">
+      <static>true</static>
+      <pose>0.962936 -1.045935 0.018 0 0 0.084637</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035951 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_237">
+      <static>true</static>
+      <pose>0.997903 -1.042909 0.018 0 0 0.088053</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.034243 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_238">
+      <static>true</static>
+      <pose>1.031089 -1.039852 0.018 0 0 0.095907</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032412 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_239">
+      <static>true</static>
+      <pose>1.062360 -1.036642 0.018 0 0 0.109092</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030460 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_240">
+      <static>true</static>
+      <pose>1.091390 -1.033563 0.018 0 0 0.101914</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.027926 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_241">
+      <static>true</static>
+      <pose>1.117832 -1.031244 0.018 0 0 0.071457</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.025167 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_242">
+      <static>true</static>
+      <pose>1.141779 -1.029820 0.018 0 0 0.046092</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.022816 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_243">
+      <static>true</static>
+      <pose>1.163599 -1.028992 0.018 0 0 0.028985</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.020857 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_244">
+      <static>true</static>
+      <pose>1.183659 -1.028462 0.018 0 0 0.023676</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.019278 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_245">
+      <static>true</static>
+      <pose>1.202327 -1.027930 0.018 0 0 0.033593</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.018074 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_246">
+      <static>true</static>
+      <pose>1.219970 -1.027098 0.018 0 0 0.061265</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.017254 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_247">
+      <static>true</static>
+      <pose>1.236954 -1.025668 0.018 0 0 0.107334</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.016845 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_248">
+      <static>true</static>
+      <pose>1.253649 -1.023340 0.018 0 0 0.169701</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.016883 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_249">
+      <static>true</static>
+      <pose>1.270420 -1.019816 0.018 0 0 0.243398</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.017415 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_250">
+      <static>true</static>
+      <pose>1.287635 -1.014797 0.018 0 0 0.321660</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.018477 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_251">
+      <static>true</static>
+      <pose>1.305662 -1.007984 0.018 0 0 0.397817</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.020094 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_252">
+      <static>true</static>
+      <pose>1.324223 -0.999476 0.018 0 0 0.460759</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.020762 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_253">
+      <static>true</static>
+      <pose>1.342362 -0.989842 0.018 0 0 0.516290</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.020332 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_254">
+      <static>true</static>
+      <pose>1.359721 -0.979362 0.018 0 0 0.570143</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.020237 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_255">
+      <static>true</static>
+      <pose>1.376569 -0.967956 0.018 0 0 0.619837</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.020467 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_256">
+      <static>true</static>
+      <pose>1.393175 -0.955543 0.018 0 0 0.663365</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.021008 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_257">
+      <static>true</static>
+      <pose>1.409809 -0.942043 0.018 0 0 0.699448</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.021845 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_258">
+      <static>true</static>
+      <pose>1.426741 -0.927375 0.018 0 0 0.727583</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.022962 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_259">
+      <static>true</static>
+      <pose>1.444240 -0.911460 0.018 0 0 0.747929</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.024348 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_260">
+      <static>true</static>
+      <pose>1.462574 -0.894216 0.018 0 0 0.761120</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.025993 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_261">
+      <static>true</static>
+      <pose>1.482015 -0.875564 0.018 0 0 0.768058</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.027891 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_262">
+      <static>true</static>
+      <pose>1.502831 -0.855422 0.018 0 0 0.769756</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.030040 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_263">
+      <static>true</static>
+      <pose>1.525292 -0.833710 0.018 0 0 0.767214</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.032438 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_264">
+      <static>true</static>
+      <pose>1.549679 -0.810225 0.018 0 0 0.765963</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.035274 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_265">
+      <static>true</static>
+      <pose>1.576083 -0.784744 0.018 0 0 0.769133</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.038115 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_266">
+      <static>true</static>
+      <pose>1.604286 -0.757321 0.018 0 0 0.773502</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040559 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_267">
+      <static>true</static>
+      <pose>1.633955 -0.728186 0.018 0 0 0.778985</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042608 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_268">
+      <static>true</static>
+      <pose>1.664762 -0.697567 0.018 0 0 0.785575</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044261 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_269">
+      <static>true</static>
+      <pose>1.696374 -0.665694 0.018 0 0 0.793323</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045521 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_270">
+      <static>true</static>
+      <pose>1.728461 -0.632796 0.018 0 0 0.802331</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046389 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_271">
+      <static>true</static>
+      <pose>1.760692 -0.599104 0.018 0 0 0.812756</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046866 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_272">
+      <static>true</static>
+      <pose>1.792736 -0.564845 0.018 0 0 0.824816</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046955 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_273">
+      <static>true</static>
+      <pose>1.824263 -0.530249 0.018 0 0 0.838802</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046659 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_274">
+      <static>true</static>
+      <pose>1.854940 -0.495545 0.018 0 0 0.855104</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045982 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_275">
+      <static>true</static>
+      <pose>1.884438 -0.460964 0.018 0 0 0.874242</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044929 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_276">
+      <static>true</static>
+      <pose>1.913194 -0.426274 0.018 0 0 0.883032</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.045188 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_277">
+      <static>true</static>
+      <pose>1.942374 -0.390789 0.018 0 0 0.882183</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046697 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_278">
+      <static>true</static>
+      <pose>1.972319 -0.354277 0.018 0 0 0.885549</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047744 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_279">
+      <static>true</static>
+      <pose>2.002582 -0.316970 0.018 0 0 0.892953</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.048333 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_280">
+      <static>true</static>
+      <pose>2.032716 -0.279097 0.018 0 0 0.904458</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.048467 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_281">
+      <static>true</static>
+      <pose>2.062274 -0.240887 0.018 0 0 0.920352</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.048153 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_282">
+      <static>true</static>
+      <pose>2.090810 -0.202570 0.018 0 0 0.941173</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.047403 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_283">
+      <static>true</static>
+      <pose>2.117876 -0.164375 0.018 0 0 0.967749</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.046230 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_284">
+      <static>true</static>
+      <pose>2.143026 -0.126533 0.018 0 0 1.001286</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.044657 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_285">
+      <static>true</static>
+      <pose>2.165813 -0.089273 0.018 0 0 1.043502</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.042714 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_286">
+      <static>true</static>
+      <pose>2.185790 -0.052823 0.018 0 0 1.096816</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.040445 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+    <model name="black_line_287">
+      <static>true</static>
+      <pose>2.202510 -0.017415 0.018 0 0 1.164624</pose>
+      <link name="line_link">
+        <visual name="line_visual">
+          <geometry><box><size>0.037915 0.100000 0.006</size></box></geometry>
+          <material><ambient>0 0 0 1</ambient><diffuse>0 0 0 1</diffuse><specular>0 0 0 1</specular></material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

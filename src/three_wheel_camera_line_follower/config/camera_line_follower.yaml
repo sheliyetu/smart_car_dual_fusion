@@ -1,0 +1,83 @@
+# ROS1 Noetic three-wheel camera line follower configuration.
+# The original 5-photoelectric-sensor chain is redesigned as:
+# camera image -> ROI -> black-line segmentation -> centroid error -> PID -> differential drive.
+
+robot_model_name: "three_wheel_camera_car"
+line_width: 0.10
+marker_rate: 20.0
+
+# Camera and OpenCV detector.
+image_topic: "/camera/image_raw"
+roi_top_ratio: 0.42
+roi_bottom_ratio: 0.90
+roi_left_ratio: 0.05
+roi_right_ratio: 0.95
+threshold_mode: "otsu"       # otsu | fixed | adaptive
+black_threshold: 90           # used when threshold_mode=fixed
+adaptive_block_size: 31       # used when threshold_mode=adaptive
+adaptive_c: 7
+blur_kernel: 5
+morph_kernel: 5
+min_area: 180.0
+min_black_ratio: 0.0015
+use_weighted_centroid: true   # weights lower ROI pixels more heavily
+error_filter_alpha: 0.60      # 0=no filtering, close to 1=smoother but slower
+publish_mask: true
+# 当前相机视野已经不再包含自车大黑块，默认关闭自车遮挡过滤。
+# 大弯道/宽黑线面积很大时仍按真实赛道处理，不再误判 LINE LOST。
+self_mask_filter_enable: false
+max_black_ratio: 1.0
+max_contour_area_ratio: 1.0
+reject_round_blob: false
+round_blob_min_area_ratio: 0.035
+
+# PID position loop. Input error is normalized to [-1, 1].
+enabled: true
+control_mode: "pid"          # p | pd | pi | pid
+kp: 32.0
+ki: 0.0
+kd: 6.0
+pos_out_limit: 60.0
+pos_int_limit: 2.0
+loop_rate: 50.0
+
+# Percent-to-Twist mapping.
+base_speed_pct: 24.0
+base_min_pct: 12.0
+curve_slow: true
+curve_factor: 0.55
+max_linear: 0.45
+max_angular: 2.6
+turn_sign: -1.0               # image error > 0 means line is right -> ROS angular.z should be negative
+
+# Lost-line behavior.
+# Important: do not use pure spin after line loss. If the line is outside the
+# camera FOV, pure rotation may never bring it back. The controller uses:
+# slow arc search -> short reverse arc -> alternating arc search.
+stop_when_lost: false
+lost_stop_after: 4.0
+keep_turn_when_lost: true
+lost_strategy: "arc_recovery"   # arc_recovery | spin | stop
+lost_grace_time: 0.20
+lost_reverse_after: 0.75
+lost_reverse_duration: 0.55
+lost_scan_period: 1.20
+lost_forward_pct: 8.0
+lost_reverse_pct: -7.0
+lost_turn_pct: 30.0
+lost_spin_turn_pct: 26.0
+
+# Demo safety guard.  Camera line following can fail if the line leaves the FOV;
+# never let the robot drive blindly through the infinite Gazebo world.
+lost_safe_stop_after: 2.0      # stop blind recovery after this many seconds
+lost_auto_reset_after: 4.5     # 0 disables auto reset; demo default resets to start
+out_of_bounds_enable: true
+out_of_bounds_action: "reset"  # stop | reset
+x_abs_limit: 4.0
+y_abs_limit: 3.0
+reset_model_name: "three_wheel_camera_car"
+reset_x: 2.136986
+reset_y: -0.207531
+reset_z: 0.04
+reset_yaw: 1.232498
+reset_cooldown: 2.0

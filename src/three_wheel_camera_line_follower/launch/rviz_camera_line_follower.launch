@@ -1,0 +1,4 @@
+<launch>
+  <param name="use_sim_time" value="true"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find three_wheel_camera_line_follower)/config/camera_line_follower.rviz"/>
+</launch>

@@ -1,0 +1,49 @@
+<launch>
+  <arg name="gui" default="true"/>
+  <arg name="rviz" default="true"/>
+  <arg name="dashboard" default="true"/>
+  <arg name="tuner_gui" default="false"/>
+  <arg name="tuner_web" default="true"/>
+  <arg name="tuner_port" default="8091"/>
+  <arg name="image_view" default="false"/>
+  <arg name="paused" default="false"/>
+  <arg name="synthetic" default="true"/>
+  <arg name="fusion_only" default="false"/>
+
+  <param name="use_sim_time" value="true"/>
+  <rosparam command="load" file="$(find three_wheel_camera_line_follower)/config/camera_line_follower.yaml"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find three_wheel_camera_line_follower)/worlds/line_track_camera.world"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find three_wheel_camera_line_follower)/urdf/three_wheel_camera_car.urdf.xacro"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    <param name="publish_frequency" value="50.0"/>
+  </node>
+
+  <!-- Spawn pose is generated from the same Catmull-Rom track; camera sees the line immediately. -->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_three_wheel_camera_car" output="screen"
+        args="-urdf -model three_wheel_camera_car -param robot_description -x 2.136986 -y -0.207531 -z 0.0 -Y 1.232498"/>
+
+  <node unless="$(arg synthetic)" pkg="three_wheel_camera_line_follower" type="camera_line_detector_node.py" name="camera_line_detector" output="screen"/>
+  
+  <!-- Dual fusion mode -->
+  <node unless="$(arg fusion_only)" pkg="three_wheel_camera_line_follower" type="line_sensor_node.py" name="line_sensor" output="screen"/>
+  <node pkg="three_wheel_camera_line_follower" type="sensor_fusion_node.py" name="sensor_fusion" output="screen"/>
+  <node pkg="three_wheel_camera_line_follower" type="camera_line_follower_node.py" name="camera_line_follower" output="screen"/>
+  <node pkg="three_wheel_camera_line_follower" type="line_visualizer_node.py" name="line_visualizer" output="screen"/>
+  <node if="$(arg dashboard)" pkg="three_wheel_camera_line_follower" type="camera_dashboard_node.py" name="camera_dashboard" output="screen"/>
+  <node if="$(arg tuner_gui)" pkg="three_wheel_camera_line_follower" type="camera_tuner_gui_node.py" name="camera_tuner_gui" output="screen"/>
+  <node if="$(arg tuner_web)" pkg="three_wheel_camera_line_follower" type="camera_tuner_web_node.py" name="camera_tuner_web" output="screen">
+    <param name="port" value="$(arg tuner_port)"/>
+    <param name="open_browser" value="false"/>
+  </node>
+
+  <node if="$(arg image_view)" pkg="image_view" type="image_view" name="debug_image_view" args="image:=/line_follower/debug_image"/>
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" args="-d $(find three_wheel_camera_line_follower)/config/camera_line_follower.rviz"/>
+</launch>

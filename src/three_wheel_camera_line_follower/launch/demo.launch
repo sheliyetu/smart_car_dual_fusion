@@ -1,0 +1,15 @@
+<launch>
+  <arg name="tuner_gui" default="false"/>
+  <arg name="tuner_web" default="true"/>
+  <arg name="tuner_port" default="8091"/>
+  <include file="$(find three_wheel_camera_line_follower)/launch/gazebo_camera_line_follower.launch">
+    <arg name="gui" value="true"/>
+    <arg name="rviz" value="true"/>
+    <arg name="dashboard" value="true"/>
+    <arg name="tuner_gui" value="$(arg tuner_gui)"/>
+    <arg name="tuner_web" value="$(arg tuner_web)"/>
+    <arg name="tuner_port" value="$(arg tuner_port)"/>
+    <arg name="image_view" value="false"/>
+    <arg name="paused" value="false"/>
+  </include>
+</launch>
